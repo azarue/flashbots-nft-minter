@@ -1,6 +1,6 @@
 const dotenv = require("dotenv");
 
-dotenv.config();
+dotenv.config({ path: './.env.wasteGas' });
 
 const ethers = {
   chainId: Number(process.env.ETHERS_CHAIN_ID),
