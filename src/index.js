@@ -1,8 +1,8 @@
 
 // configure environment variables
 const dotenv = require('dotenv');
-dotenv.config();
-
+//dotenv.config({ path: 'config/.env.wasteGas' });
+dotenv.config({ path: 'config/.env.wasteGas' });
 // load config file
 const { ethers, flashbots, nft, gas } = require("./config");
 
@@ -22,6 +22,7 @@ const provider = new providers.InfuraProvider(ethers.chainId);
 
 // configure big number
 const GWEI = BigNumber.from(10).pow(9);
+const ETHER = BigNumber.from(10).pow(18);
 
 const sendBundle = async (flashbotsProvider) => {
 
@@ -35,9 +36,9 @@ const sendBundle = async (flashbotsProvider) => {
 				transaction: {
 					chainId: ethers.chainId,
 					type: 2, // ip1559 transaction
-					value:BigNumber.from(0),
+					value: ETHER.div(100).mul(nft.value), // 0.03
 					data: nft.data,
-					gasLimit: 50000,
+					// gasLimit: gas.gasLimit, // remove this to force estimateGas by flashbots.
 					maxFeePerGas: GWEI.mul(gas.maxFeePerGas),
 					maxPriorityFeePerGas: GWEI.mul(gas.maxPriorityFeePerGas),
 					to: nft.address,
