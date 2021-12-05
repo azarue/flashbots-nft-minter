@@ -1,6 +1,3 @@
-const dotenv = require("dotenv");
-
-dotenv.config({ path: './.env.wasteGas' });
 
 const ethers = {
   chainId: Number(process.env.ETHERS_CHAIN_ID),
@@ -21,6 +18,7 @@ const nft = {
 const gas = {
   maxFeePerGas: process.env.MAX_FEE_PER_GAS_GWEI,
   maxPriorityFeePerGas: process.env.MAX_PRIORITY_FEE_PER_GAS_GWEI,
+  gasLimit : process.env.GAS_LIMIT_GWEI
 };
 
 module.exports = { ethers, flashbots, nft, gas };
